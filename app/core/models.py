@@ -5,7 +5,8 @@ class Ingredient(models.Model):
     recipe = models.ForeignKey(
         to='Recipe',
         on_delete=models.CASCADE,
-        related_name='ingredients'
+        related_name='ingredients',
+        null=True
     )
     name = models.CharField(max_length=255)
 

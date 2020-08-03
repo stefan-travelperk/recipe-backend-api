@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets,mixins
 
 from core.models import Recipe
 
@@ -13,10 +13,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         name_filter = self.request.query_params.get('name')
 
-        if name_filter:
-            queryset = self.queryset
-            queryset = queryset.filter(name__contains=name_filter)
+        if not name_filter:
+            return super().get_queryset()
 
-            return queryset
+        self.queryset = self.queryset.filter(name__contains=name_filter)
 
         return self.queryset
