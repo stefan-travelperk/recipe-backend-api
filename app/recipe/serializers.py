@@ -31,7 +31,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         ingredients = validated_data.pop('ingredients')
 
-        super(RecipeSerializer,self).update(instance,validated_data)
+        super(RecipeSerializer, self).update(instance, validated_data)
 
         Ingredient.objects.filter(recipe=instance).delete()
 
